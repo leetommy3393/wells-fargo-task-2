@@ -8,8 +8,17 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long clientId;
 
-    @Column(nullable = false)
-    private Long advisorId;
+    public Client(Advisor advisor, String firstName, String lastName, String address, String phone, String email) {
+        this.advisor = advisor;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    @ManyToOne
+    private Advisor advisor;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -21,21 +30,8 @@ public class Client {
     @Column(nullable = false)
     private String email;
 
-    public Client(Long advisorId, String firstName, String lastName, String address, String phone, String email) {
-        this.advisorId = advisorId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
-    }
-
     public Client() {
 
-    }
-
-    public void setAdvisorId(Long advisorId) {
-        this.advisorId = advisorId;
     }
 
     public void setFirstName(String firstName) {
@@ -62,8 +58,12 @@ public class Client {
         return clientId;
     }
 
-    public Long getAdvisorId() {
-        return advisorId;
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
     }
 
     public String getFirstName() {

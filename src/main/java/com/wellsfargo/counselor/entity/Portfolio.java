@@ -10,15 +10,35 @@ public class Portfolio {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long portfolioId;
 
-    @Column(nullable = false)
-    private Long clientId;
+    @ManyToOne
+    private Client client;
 
     @Column(nullable = false)
-    private Date creationDate;
+    private String creationDate;
 
-    public Portfolio(Long clientId) {
-        this.clientId = clientId;
-        this.creationDate = new Date();
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Portfolio(Client client, String creationDate) {
+        this.client = client;
+        this.creationDate = creationDate;
     }
 
     public Portfolio() {

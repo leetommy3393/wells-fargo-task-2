@@ -9,8 +9,8 @@ public class Security {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long securityId;
-    @Column(nullable = false)
-    private Long portfolioId;
+    @ManyToOne
+    private Portfolio portfolio;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -18,72 +18,72 @@ public class Security {
     @Column(nullable = false)
     private Double purchasePrice;
     @Column(nullable = false)
-    private Date purchaseDate;
+    private String purchaseDate;
     @Column(nullable = false)
     private Integer quantity;
 
-    public Security(Long portfolioId, String name, String category, Double purchasePrice, Integer quantity) {
-        this.portfolioId = portfolioId;
-        this.name = name;
-        this.category = category;
-        this.purchasePrice = purchasePrice;
-        this.quantity = quantity;
-        this.purchaseDate = new Date();
-    }
-
     public Security() {
-
-    }
-
-    public void setPortfolioId(Long portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setPurchasePrice(Double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+        
     }
 
     public Long getSecurityId() {
         return securityId;
     }
 
-    public Long getPortfolioId() {
-        return portfolioId;
+    public Portfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getCategory() {
         return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Double getPurchasePrice() {
         return purchasePrice;
     }
 
-    public Date getPurchaseDate() {
+    public void setPurchasePrice(Double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public String getPurchaseDate() {
         return purchaseDate;
+    }
+
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Security(Portfolio portfolio, String name, String category, Double purchasePrice, String purchaseDate, Integer quantity) {
+        this.portfolio = portfolio;
+        this.name = name;
+        this.category = category;
+        this.purchasePrice = purchasePrice;
+        this.purchaseDate = purchaseDate;
+        this.quantity = quantity;
     }
 }
